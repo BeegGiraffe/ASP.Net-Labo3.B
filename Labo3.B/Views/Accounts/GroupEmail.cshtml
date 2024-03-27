@@ -1,7 +1,55 @@
 ﻿@model IEnumerable<MoviesDBManager.Models.User>
 @{
     ViewBag.Title = "GroupEmail";
+    IEnumerable<MoviesDBManager.Models.User> users = (IEnumerable<MoviesDBManager.Models.User>)ViewData.Values.ToList();
 }
 
-<h2>GroupEmails</h2>
+<h2>Envoi de courriel</h2>
+<hr />
 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    <div class="formLayout">
+        <fieldset>
+            <div class="legend">@Html.Label("Destinataires")</div>
+            @Html.CheckBoxFor()
+        </fieldset>
+        <fieldset>
+            <div class="legend">@Html.Label("Courriel")</div>
+
+        </fieldset>
+    </div>
+
+}
+
+@section Script {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script defer>
+        function validateSelection() {
+            let oneSelected = false;
+            $("input[type='checkbox'][name='SelectedUsers']").each(function () {
+                if ($(this).prop('checked')) oneSelected = true;
+            });
+            if (!oneSelected)
+                $("#Error_SelectedUsers").css("display", "inline");
+            else
+                $("#Error_SelectedUsers").css("display", "none");
+            return oneSelected;
+        }
+        $("input[type='checkbox'][name='SelectedUsers']").change(function () { validateSelection(); });
+        $("form").submit(function () {
+            return validateSelection();
+        })
+        $("#SelectAll").click(function () {
+            $("input[type='checkbox'][name='SelectedUsers']").each(function () { $(this).prop('checked', true) });
+            validateSelection();
+            return false; // prevent form submit
+        })
+        $("#DeSelectAll").click(function () {
+            $("input[type='checkbox'][name='SelectedUsers']").each(function () { $(this).prop('checked', false) });
+            validateSelection();
+            return false; // prevent form submit
+        })
+    </script>
+}

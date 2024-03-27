@@ -370,7 +370,7 @@ namespace MoviesDBManager.Controllers
         [OnlineUsers.AdminAccess]
         public ActionResult GroupEmail()
         {
-            return View();
+            return View(DB.Users.SortedUsers());
         }
     }
 }
