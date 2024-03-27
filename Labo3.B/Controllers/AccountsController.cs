@@ -366,5 +366,11 @@ namespace MoviesDBManager.Controllers
         }
 
         #endregion
+
+        [OnlineUsers.AdminAccess]
+        public ActionResult GroupEmail()
+        {
+            return View();
+        }
     }
 }

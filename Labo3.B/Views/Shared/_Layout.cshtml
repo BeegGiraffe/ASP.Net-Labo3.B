@@ -32,11 +32,9 @@
                     </a>
                     if (currentUser.IsAdmin)
                     {
-                        <span class="menuIcon">
-                            <span>@Helper.IconCmd("Accounts", "GroupEmails", "fa-envelope", "Envoi de courriels")</span>
-                        </span>
-                        
-           
+                        <a class="menuIcon" href="/Accounts/GroupEmail">
+                            <span class="icon fa fa-envelope" title="Envoi de courriels" data-placement="bottom"></span>
+                        </a>
                     }
                 }
 
