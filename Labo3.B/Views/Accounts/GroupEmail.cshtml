@@ -1,22 +1,25 @@
-﻿@model IEnumerable<MoviesDBManager.Models.User>
+﻿@model MoviesDBManager.Models.User
+
 @{
     ViewBag.Title = "GroupEmail";
-    IEnumerable<MoviesDBManager.Models.User> users = (IEnumerable<MoviesDBManager.Models.User>)ViewData.Values.ToList();
 }
 
 <h2>Envoi de courriel</h2>
-<hr />
+<br />
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken();
     <div class="formLayout">
+        <div>@ViewBag.Message</div>
         <fieldset>
             <div class="legend">@Html.Label("Destinataires")</div>
-            @Html.CheckBoxFor()
-        </fieldset>
-        <fieldset>
-            <div class="legend">@Html.Label("Courriel")</div>
+            @foreach (MoviesDBManager.Models.User user in ViewBag.GroupEmail)
+            {
+                <p>@user.FirstName</p><br />
+                //@Html.CheckBoxFor(user => user.IsSelected, new { @checked = "checked" })
+                //@Html.LabelFor(user => user.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            }
 
         </fieldset>
     </div>
