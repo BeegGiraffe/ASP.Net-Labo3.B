@@ -26,15 +26,13 @@
                     </div> <br />
                 }
             </fieldset>
-            
-
         </fieldset>
         <fieldset>
             <div class="legend">@Html.Label("Courriel")</div>
             @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(model => model.Subject) } })
             @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
 
-            @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => "Bonjour ") } })
             @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
         </fieldset>
     </div>
