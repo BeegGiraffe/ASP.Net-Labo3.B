@@ -2,7 +2,21 @@
 
 @{
     ViewBag.Title = "UsersList";
+
+
+    //var choices = (List<int>Session["Choices"]);
+    //int index = 0;
 }
 
 <h2>Liste des usagers</h2>
+
+
+if(choices != null)
+    {
+        foreach (int choice in choices)
+        {
+            <div>@choice</div>
+        }
+    }
+
 

@@ -11,6 +11,12 @@ namespace MoviesDBManager.Controllers
     public class AccountsController : Controller
     {
 
+        [OnlineUsers.AdminAccess]
+        public ActionResult Index()
+        {
+            return View(DB.Users.SortedUsers());
+        }
+
         #region Account creation
         [HttpPost]
         public JsonResult EmailAvailable(string email)
@@ -19,6 +25,7 @@ namespace MoviesDBManager.Controllers
             int id = onLineUser != null? onLineUser.Id : 0;
             return Json(DB.Users.EmailAvailable(email, id));
         }
+
         [HttpPost]
         public JsonResult EmailExist(string email)
         {
@@ -368,3 +375,5 @@ namespace MoviesDBManager.Controllers
         #endregion
     }
 }
+
+
