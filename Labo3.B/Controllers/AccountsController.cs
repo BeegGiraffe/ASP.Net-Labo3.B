@@ -12,9 +12,9 @@ namespace MoviesDBManager.Controllers
     {
 
         [OnlineUsers.AdminAccess]
-        public ActionResult Index()
+        public ActionResult UsersList()
         {
-            ViewBag.GroupEmail = DB.Users.SortedUsers();
+            ViewBag.UsersList = DB.Users.SortedUsers();
             return View();
         }
 

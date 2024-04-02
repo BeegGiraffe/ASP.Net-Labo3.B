@@ -10,13 +10,26 @@
 
 <h2>Liste des usagers</h2>
 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="formLayout">
+        @foreach (MoviesDBManager.Models.User user in ViewBag.UsersList)
+        {
+            string fullName = user.FirstName + " " + user.LastName;
+            @Helper.Image(user.Avatar, "UserSmallAvatar")
+            @Html.Label(fullName)
+        }
+    </div>
+}
 
-@if(choices != null)
+
+@*@if(choices != null)
     {
         @foreach (int choice in choices)
         {
             <div>@choice</div>
         }
-    }
+    }*@
 
 
