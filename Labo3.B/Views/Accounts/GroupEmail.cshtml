@@ -14,16 +14,23 @@
         <div>@ViewBag.Message</div>
         <fieldset>
             <div class="legend">@Html.Label("Destinataires")</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; margin-bottom:5px;  align-items:center;">
+                <input type="button" id="SelectAll" name="Tous" value="Tous"/>
+                <p></p>
+                <input type="button" id="DeSelectAll" name="Aucun" value="Aucun"/>
+            </div>
             <fieldset>
                 @foreach (MoviesDBManager.Models.User user in ViewBag.GroupEmail)
                 {
                     string fullName = user.FirstName + ' ' + user.LastName;
 
-                    <div style="display: grid; grid-template-columns: 45px auto 1fr; margin-left:1px; margin-top: 8px; margin-bottom: 8px;align-items:center">
-                        @Html.CheckBoxFor(model => user.IsSelected, new { @checked = "checked" })
-                        @Helper.Image(user.Avatar, "UserSmallAvatar")
+                    <div style="display: grid; grid-template-columns: 45px auto 1fr; margin-bottom:3px; align-items:center; text-align:center;">
+                        <input type="checkbox" name="SelectedUsers" value="@user.Id" />
+                        <div style="margin-right:10px;">
+                            @Helper.Image(user.Avatar, "UserSmallAvatar")
+                        </div>
                         @Html.Label("user.IsSelected", fullName)
-                    </div> <br />
+                    </div>
                 }
             </fieldset>
         </fieldset>
@@ -31,10 +38,13 @@
             <div class="legend">@Html.Label("Courriel")</div>
             @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(model => model.Subject) } })
             @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
-
-            @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => "Bonjour ") } })
-            @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+            <br />
+            <div style="display:grid; grid-template-columns:auto 0px">
+                @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+            </div>
         </fieldset>
+        <input type="submit" value="Envoyer" class="btn btn-default"/>
     </div>
 
 }
