@@ -14,7 +14,8 @@ namespace MoviesDBManager.Controllers
         [OnlineUsers.AdminAccess]
         public ActionResult Index()
         {
-            return View(DB.Users.SortedUsers());
+            ViewBag.GroupEmail = DB.Users.SortedUsers();
+            return View();
         }
 
         #region Account creation
