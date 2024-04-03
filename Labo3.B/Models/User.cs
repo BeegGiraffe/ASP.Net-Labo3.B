@@ -72,8 +72,6 @@ namespace MoviesDBManager.Models
         public bool IsPowerUser { get { return UserTypeId <= 2 /* Admin = 1 , PowerUser = 2 */; } }
         [JsonIgnore]
         public bool IsAdmin { get { return UserTypeId == 1 /* Admin */; } }
-        [JsonIgnore]
-        public bool IsSelected { get; set; }
 
         public string GetFullName(bool showGender = false)
         {
