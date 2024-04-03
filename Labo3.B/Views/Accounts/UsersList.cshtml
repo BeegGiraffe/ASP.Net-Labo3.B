@@ -2,10 +2,8 @@
 
 @{
     ViewBag.Title = "UsersList";
+    var currentUser = MoviesDBManager.Models.OnlineUsers.GetSessionUser();
 
-
-    //var choices = (List<int>Session["Choices"]);
-    //int index = 0;
 }
 
 <h2>Liste des usagers</h2>
@@ -13,14 +11,76 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="formLayout">
-        @foreach (MoviesDBManager.Models.User user in ViewBag.UsersList)
+<div class="formLayout">
+    @foreach (MoviesDBManager.Models.User user in ViewBag.UsersList)
+    {
+        @Html.Hidden("id", user.Id)
+
+        if (currentUser.Id != user.Id)
         {
+
             string fullName = user.FirstName + " " + user.LastName;
             @Helper.Image(user.Avatar, "UserSmallAvatar")
             @Html.Label(fullName)
+
+            // Indicateur de connection
+            if (user.Blocked)
+            {
+                <img src="/Content/UI-Images/Masked.png" class="menuIcon" title="Indicateur de connection" />
+            }
+            else if (MoviesDBManager.Models.OnlineUsers.IsOnline(user.Id))
+            {
+                <img src="/Content/UI-Images/OnLine.png" class="menuIcon" title="Indicateur de connection" />
+            }
+            else
+            {
+                <img src="/Content/UI-Images/OffLine.png" class="menuIcon" title="Indicateur de connection" />
+            }
+
+            // Type d'utilisateur
+            <a href="@Url.Action("ChangeUserType", new { id = user.Id })">
+                @if (user.UserTypeId == 1)
+                {
+                    <img src="/Content/UI-Images/admin.png" class="menuIcon" title="Type d'utilisateur" />
+                }
+                else if (user.UserTypeId == 2)
+                {
+                    <img src="/Content/UI-Images/power user.png" class="menuIcon" title="Type d'utilisateur" />
+                }
+                else if (user.UserTypeId == 3)
+                {
+                    <img src="/Content/UI-Images/user.png" class="menuIcon" title="Type d'utilisateur" />
+                }
+            </a>
+
+
+            if (user.Verified)
+            {
+                <img src="/Content/UI-Images/Accept.png" class="menuIcon" title="Statut d’inscription" />
+            }
+            else
+            {
+                <img src="/Content/UI-Images/Abort.png" class="menuIcon" title="Statut d’inscription" />
+            }
+
+            // Blocage d'un compte
+            <a href="@Url.Action("BlockUser", new { id = user.Id })">
+                @if (user.Blocked)
+                {
+                    @Helper.Icon("Accounts", "menu-Icon fa fa-check-square aria-hidden=\"true\"", "Bloquer")
+                }
+                else
+                {
+                    @Helper.Icon("Accounts", "menu-Icon fa-square-o", "Bloquer")
+
+                }
+            </a>
         }
-    </div>
+
+
+
+    }
+</div>
 }
 
 
@@ -31,5 +91,8 @@
             <div>@choice</div>
         }
     }*@
+
+
+
 
 

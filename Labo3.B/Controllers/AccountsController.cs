@@ -10,12 +10,119 @@ namespace MoviesDBManager.Controllers
 {
     public class AccountsController : Controller
     {
+        [OnlineUsers.AdminAccess]
+        public ActionResult DeleteUser(int id)
+        {
+            User userToDelete = DB.Users.Get(id);
+
+            if (userToDelete == null)
+            {
+                return RedirectToAction("UsersList");
+            }
+
+            DB.Users.Delete(id);
+
+            return RedirectToAction("UsersList");
+        }
+
+        [OnlineUsers.AdminAccess]
+        public void SendEmailBlockAccount(int id)
+        {
+            User user = DB.Users.Get(id);
+
+            if (user.Id != 0)
+            {
+                string acces = "";
+                string Subject = "";
+
+                if (user.Blocked)
+                {
+                    acces = "bloquer";
+                    Subject = "Movies Database - Acces bloquer";
+
+                }
+                else
+                {
+                    acces = "débloquer";
+                    Subject = "Movies Database - Acces autoriser";
+                }
+
+                string Body = "Bonjour " + user.GetFullName(true) + @",<br/><br/>";
+                Body += @"Ce courriel est pour vous aviser que l'acces au site ChatManager via votre compte a été" + acces + ". <br/>";
+                Body += @"<br/><br/>Ce courriel a été généré automatiquement, veuillez ne pas y répondre.";
+                Body += @"<br/><br/>Si vous éprouvez des difficultés ou s'il s'agit d'une erreur, veuillez le signaler à <a href='mailto:"
+                     + SMTP.OwnerEmail + "'>" + SMTP.OwnerName + "</a> (Webmestre du site ChatManager)";
+
+                SMTP.SendEmail(user.GetFullName(), user.Email, Subject, Body);
+            }
+        }
+        
+        [OnlineUsers.AdminAccess]
+        public ActionResult BlockUser(int id)
+        {
+            User user = DB.Users.Get(id);
+
+            if (user != null)
+            {
+                user.Blocked = !user.Blocked;
+                DB.Users.Update(user);
+                SendEmailBlockAccount(user.Id);
+            }
+
+            return RedirectToAction("UsersList");
+        }
 
         [OnlineUsers.AdminAccess]
         public ActionResult UsersList()
         {
             ViewBag.UsersList = DB.Users.SortedUsers();
             return View();
+        }
+
+        [OnlineUsers.AdminAccess]
+        public ActionResult IndicateurStatus(int id)
+        {
+            User user = DB.Users.Get(id);
+
+            if (user.UserTypeId == 3)
+            {
+                user.UserTypeId = 2;
+            }
+            else if (user.UserTypeId == 2)
+            {
+                user.UserTypeId = 1;
+            }
+            else if (user.UserTypeId == 1)
+            {
+                user.UserTypeId = 3;
+            }
+
+            DB.Users.Update(user);
+
+            return RedirectToAction("UsersList");
+        }
+
+        [OnlineUsers.AdminAccess]
+        public ActionResult ChangeUserType(int id)
+        {
+            User user = DB.Users.Get(id);
+
+            if (user.UserTypeId == 3)
+            {
+                user.UserTypeId = 2;
+            }
+            else if (user.UserTypeId == 2)
+            {
+                user.UserTypeId = 1;
+            }
+            else if (user.UserTypeId == 1)
+            {
+                user.UserTypeId = 3;
+            }
+
+            DB.Users.Update(user);
+
+            return RedirectToAction("UsersList");
         }
 
         #region Account creation
