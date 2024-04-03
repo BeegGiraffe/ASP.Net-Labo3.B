@@ -15,17 +15,16 @@
     @foreach (MoviesDBManager.Models.User user in ViewBag.UsersList)
     {
         @Html.Hidden("id", user.Id)
+                    if (currentUser.Id != user.Id)
+                    {
 
-        if (currentUser.Id != user.Id)
-        {
-
-            string fullName = user.FirstName + " " + user.LastName;
-            @Helper.Image(user.Avatar, "UserSmallAvatar")
-            @Html.Label(fullName)
-
+                        string fullName = user.FirstName + " " + user.LastName;
+                        @Helper.Image(user.Avatar, "UserSmallAvatar")
+                        @Html.Label(fullName)
+            
             // Indicateur de connection
             if (user.Blocked)
-            {
+                        {
                 <img src="/Content/UI-Images/Masked.png" class="menuIcon" title="Indicateur de connection" />
             }
             else if (MoviesDBManager.Models.OnlineUsers.IsOnline(user.Id))
@@ -33,7 +32,7 @@
                 <img src="/Content/UI-Images/OnLine.png" class="menuIcon" title="Indicateur de connection" />
             }
             else
-            {
+    {
                 <img src="/Content/UI-Images/OffLine.png" class="menuIcon" title="Indicateur de connection" />
             }
 
@@ -44,22 +43,22 @@
                     <img src="/Content/UI-Images/admin.png" class="menuIcon" title="Type d'utilisateur" />
                 }
                 else if (user.UserTypeId == 2)
-                {
+    {
                     <img src="/Content/UI-Images/power user.png" class="menuIcon" title="Type d'utilisateur" />
                 }
                 else if (user.UserTypeId == 3)
-                {
+    {
                     <img src="/Content/UI-Images/user.png" class="menuIcon" title="Type d'utilisateur" />
                 }
             </a>
 
 
             if (user.Verified)
-            {
+    {
                 <img src="/Content/UI-Images/Accept.png" class="menuIcon" title="Statut d’inscription" />
             }
             else
-            {
+    {
                 <img src="/Content/UI-Images/Abort.png" class="menuIcon" title="Statut d’inscription" />
             }
 
@@ -70,8 +69,8 @@
                     @Helper.Icon("Accounts", "menu-Icon fa fa-check-square aria-hidden=\"true\"", "Bloquer")
                 }
                 else
-                {
-                    @Helper.Icon("Accounts", "menu-Icon fa-square-o", "Bloquer")
+    {
+        @Helper.Icon("Accounts", "menu-Icon fa-square-o", "Bloquer")
 
                 }
             </a>

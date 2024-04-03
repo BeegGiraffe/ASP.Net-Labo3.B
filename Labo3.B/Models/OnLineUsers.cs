@@ -18,7 +18,18 @@ namespace MoviesDBManager.Models
                 return (List<int>)HttpRuntime.Cache["OnLineUsers"];
             }
         }
-        public static Func<int,bool> IsOnline = n => n == (int)HttpContext.Current.Session["UserId"] ? true : false;
+        public static bool IsOnline(int userId)
+        {
+            foreach (int user in ConnectedUsersId)
+            {
+                if (userId == user)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public static void AddSessionUser(int userId)
         {
             HttpContext.Current.Session["UserId"] = userId;

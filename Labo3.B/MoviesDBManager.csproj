@@ -182,7 +182,6 @@
     <Content Include="Content\UI-Images\admin.png" />
     <Content Include="Content\UI-Images\Blocked.png" />
     <Content Include="Content\UI-Images\Masked.png" />
-    <Content Include="Content\UI-Images\neutral.png" />
     <Content Include="Content\UI-Images\OffLine.png" />
     <Content Include="Content\UI-Images\OnLine.png" />
     <Content Include="Content\UI-Images\power user.png" />
@@ -265,8 +264,8 @@
     <Content Include="App_Data\UnverifiedEmails.json" />
     <Content Include="App_Data\Users.json" />
     <Content Include="PLan de site.pdf" />
-    <Content Include="Labo 3B.pdf" />
     <None Include="Properties\PublishProfiles\MDB2023 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\MoviesDBManager20240403073917 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\MoviesRepository - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\imageControl-2.0.js" />
@@ -281,7 +280,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\NotificationsHandler.js" />
     <Content Include="Scripts\partialRefresh.js" />
     <Content Include="Scripts\selectionControl.js" />
     <Content Include="Scripts\selections.js" />
