@@ -131,6 +131,7 @@
     </Compile>
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\ActorsRepository.cs" />
+    <Compile Include="Models\MailFormView.cs" />
     <Compile Include="Models\EmailView.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\ImageAsset.cs" />
