@@ -143,6 +143,7 @@
     <Compile Include="Models\Distributor.cs" />
     <Compile Include="Models\DistributorsRepository.cs" />
     <Compile Include="Models\LoginCredential.cs" />
+    <Compile Include="Models\MailFormView.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\MoviesRepository.cs" />
     <Compile Include="Models\OnLineUsers.cs" />
@@ -332,10 +333,11 @@
     <Content Include="Views\Accounts\SubscribeDone.cshtml" />
     <Content Include="Views\Accounts\VerifyDone.cshtml" />
     <Content Include="Views\Accounts\VerifyError.cshtml" />
-    <Content Include="Views\Accounts\UsersList.cshtml" />
-    <Content Include="Views\Accounts\GroupEmails.cshtml" />
+    <Content Include="Views\Accounts\GroupEmail.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Mail\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
