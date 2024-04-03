@@ -1,1 +1,53 @@
-[{"Id":1,"UserTypeId":1,"Verified":true,"Blocked":false,"FirstName":"Nicolas","LastName":"Chourot","GenderId":1,"Email":"nicolaschourot@videotron.ca","Avatar":"/Images_Data/User_Avatars/8f4fcab1-187c-4808-b1d6-f1138a7c0cd2.jpeg","Password":"password","CreationDate":"2024-03-14T11:46:53.6287006-04:00"},{"Id":2,"UserTypeId":3,"Verified":true,"Blocked":false,"FirstName":"Nicolas","LastName":"Chourot","GenderId":1,"Email":"Nicolas.Chourot@clg.qc.ca","Avatar":"/Images_Data/User_Avatars/dc030981-588c-4130-97f4-7f38fbee5db4.jpeg","Password":"password","CreationDate":"2024-03-15T09:24:40.6980116-04:00"},{"Id":3,"UserTypeId":3,"Verified":true,"Blocked":false,"FirstName":"Jean-Michel","LastName":"Cantin","GenderId":1,"Email":"jeanmishoo@gmail.com","Avatar":"/Images_Data/User_Avatars/ca5e8592-e389-4e37-90c3-9eb8e1f1a164.png","Password":"password","CreationDate":"2024-03-25T13:36:47.9100105-04:00"}]
+[
+  {
+    "Id": 1,
+    "UserTypeId": 1,
+    "Verified": true,
+    "Blocked": false,
+    "FirstName": "Nicolas",
+    "LastName": "Chourot",
+    "GenderId": 1,
+    "Email": "nicolaschourot@videotron.ca",
+    "Avatar": "/Images_Data/User_Avatars/8f4fcab1-187c-4808-b1d6-f1138a7c0cd2.jpeg",
+    "Password": "password",
+    "CreationDate": "2024-03-14T11:46:53.6287006-04:00"
+  },
+  {
+    "Id": 2,
+    "UserTypeId": 3,
+    "Verified": true,
+    "Blocked": false,
+    "FirstName": "Nicolas",
+    "LastName": "Chourot",
+    "GenderId": 1,
+    "Email": "Nicolas.Chourot@clg.qc.ca",
+    "Avatar": "/Images_Data/User_Avatars/dc030981-588c-4130-97f4-7f38fbee5db4.jpeg",
+    "Password": "password",
+    "CreationDate": "2024-03-15T09:24:40.6980116-04:00"
+  },
+  {
+    "Id": 3,
+    "UserTypeId": 3,
+    "Verified": true,
+    "Blocked": false,
+    "FirstName": "Jean-Michel",
+    "LastName": "Cantin",
+    "GenderId": 1,
+    "Email": "jeanmishoo@gmail.com",
+    "Avatar": "/Images_Data/User_Avatars/ca5e8592-e389-4e37-90c3-9eb8e1f1a164.png",
+    "Password": "password",
+    "CreationDate": "2024-03-25T13:36:47.9100105-04:00"
+  },
+  {
+    "Id": 5,
+    "UserTypeId": 3,
+    "Verified": true,
+    "Blocked": false,
+    "FirstName": "Pierre",
+    "LastName": "Lavoie",
+    "GenderId": 1,
+    "Email": "pierre@yopmail.com",
+    "Avatar": "/Images_Data/User_Avatars/61d07a38-1dbb-4cbb-8735-f44ce3c11408.jpeg",
+    "Password": "password",
+    "CreationDate": "2024-04-02T18:03:40.0596663-04:00"
+  }]

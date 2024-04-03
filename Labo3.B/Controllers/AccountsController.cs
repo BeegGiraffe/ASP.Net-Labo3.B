@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web.Mvc;
 using MoviesDBManager.Models;
 using Mail;
+using System.Web.Services.Description;
+using System.EnterpriseServices;
+using System.Security.Authentication.ExtendedProtection;
 
 
 namespace MoviesDBManager.Controllers
@@ -372,6 +375,27 @@ namespace MoviesDBManager.Controllers
         {
             ViewBag.GroupEmail = DB.Users.SortedUsers();
             return View();
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        // Les paramètres sont TOUJOURS nulls. Je n'ai absoluement aucune idée pourquoi
+        // c'est le cas. j'ai trouvé un vieux forum de 3 ans détaillant le même problème
+        // et il y incluait une solution qui impliquait le fichier "Startup.cs". Cependant,
+        // j'ai appris durant ma recherche que ce fichier n'existe plus dans la version 6
+        // de .NET . Voici le forum: 
+        // https://stackoverflow.com/questions/64268698/ajax-post-data-to-mvc-controller-in-asp-net-core-always-null-when-passing-an-obj
+        //////////////////////////////////////////////////////////////////////////////////////////
+        [HttpPost]
+        public ActionResult GroupEmail(User[] users, MailFormView mail)
+        {
+            
+            foreach (User user in users)
+            {
+                string Body = "Bonjour " + user.GetFullName(true) + @",<br/><br/>" + mail.Body;
+                SMTP.SendEmail(user.GetFullName(), user.Email, mail.Subject, Body);
+            }
+            
+            return RedirectToAction("GroupEmail", new { status = "Message envoyé aux usagers sélectionnés avec succès" });
         }
     }
 }

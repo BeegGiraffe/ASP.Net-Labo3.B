@@ -11,42 +11,48 @@
 {
     @Html.AntiForgeryToken();
     <div class="formLayout">
+
         <div>@ViewBag.Message</div>
         <fieldset>
             <div class="legend">@Html.Label("Destinataires")</div>
+
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; margin-bottom:5px;  align-items:center;">
-                <input type="button" id="SelectAll" name="Tous" value="Tous"/>
+                <input type="button" id="SelectAll" name="Tous" value="Tous" />
                 <p></p>
-                <input type="button" id="DeSelectAll" name="Aucun" value="Aucun"/>
+                <input type="button" id="DeSelectAll" name="Aucun" value="Aucun" />
             </div>
-            <fieldset>
-                @foreach (MoviesDBManager.Models.User user in ViewBag.GroupEmail)
-                {
-                    string fullName = user.FirstName + ' ' + user.LastName;
+            <div class="form-group">
+                <fieldset>
+                    @foreach (MoviesDBManager.Models.User user in ViewBag.GroupEmail)
+                    {
+                        string fullName = user.FirstName + ' ' + user.LastName;
 
-                    <div style="display: grid; grid-template-columns: 45px auto 1fr; margin-bottom:3px; align-items:center; text-align:center;">
-                        <input type="checkbox" name="SelectedUsers" value="@user.Id" />
-                        <div style="margin-right:10px;">
-                            @Helper.Image(user.Avatar, "UserSmallAvatar")
+                        <div style="display: grid; grid-template-columns: 45px auto 1fr; margin-bottom:3px; align-items:center; text-align:center;">
+                            <input type="checkbox" name="SelectedUsers" value="@user.Id" />
+                            <div style="margin-right:10px;">
+                                @Helper.Image(user.Avatar, "UserSmallAvatar")
+                            </div>
+                            @Html.Label("user.IsSelected", fullName)
                         </div>
-                        @Html.Label("user.IsSelected", fullName)
-                    </div>
-                }
-            </fieldset>
-        </fieldset>
-        <fieldset>
-            <div class="legend">@Html.Label("Courriel")</div>
-            @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(model => model.Subject) } })
-            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
-            <br />
-            <div style="display:grid; grid-template-columns:auto 0px">
-                @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                    }
+                </fieldset>
             </div>
         </fieldset>
-        <input type="submit" value="Envoyer" class="btn btn-default"/>
+        <div class="form-group">
+            <fieldset>
+                <div class="legend">@Html.Label("Courriel")</div>
+                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(model => model.Subject) } })
+                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                <br />
+                <div style="display:grid; grid-template-columns:auto 0px">
+                    @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                </div>
+            </fieldset>
+        </div>
+        <input type="submit" id="SubmitEmails" value="Envoyer" class="btn btn-default"/>
     </div>
-
+    <span>P.S. l'envoi de courriels ne fonctionne pas.</span>
 }
 
 @section Scripts {
@@ -77,5 +83,30 @@
             validateSelection();
             return false; // prevent form submit
         })
+
+        // code basé sur la solution dans ce forum:
+        // https://stackoverflow.com/questions/60410109/passing-javascript-array-from-view-to-controller-in-asp-net-mvc-5
+        $("#SubmitEmails").click(function () {
+            var users = document.getElementsByName('SelectedUsers');
+            var checkedUsers = [];
+            for (var i = 0, n = users.length; i < n; i++) {
+                if (users[i].checked) {
+                    checkedUsers.push(users[i])
+                }
+            }
+            var mailInfo = [document.getElementById("Subject"), document.getElementById("Body")];
+
+            dataPost = JSON.stringify({ users: checkedUsers, mail: mailInfo });
+
+            $.ajax({
+                url: '/Accounts/GroupEmail',
+                type: 'POST',
+                dataType: 'JSON',
+                contentType: 'application/json; charset=utf-8',
+                data: dataPost,
+                traditional: true
+            });
+        })
+        
     </script>
 }
