@@ -23,10 +23,34 @@ namespace MoviesDBManager.Controllers
                 return RedirectToAction("UsersList");
             }
 
+            SendEmailDeleteAccount(id);
             DB.Users.Delete(id);
 
             return RedirectToAction("UsersList");
         }
+
+        [OnlineUsers.AdminAccess]
+        public void SendEmailDeleteAccount(int id)
+        {
+            User user = DB.Users.Get(id);
+
+            if (user.Id != 0)
+            {
+                string acces = "supprimer";
+                string Subject = "Suppression compte";
+
+             
+
+                string Body = "Bonjour " + user.GetFullName(true) + @",<br/><br/>";
+                Body += @"Ce courriel est pour vous aviser que votre compte au site ChatManager a été" + acces + ". <br/>";
+                Body += @"<br/><br/>Ce courriel a été généré automatiquement, veuillez ne pas y répondre.";
+                Body += @"<br/><br/>Si vous éprouvez des difficultés ou s'il s'agit d'une erreur, veuillez le signaler à <a href='mailto:"
+                     + SMTP.OwnerEmail + "'>" + SMTP.OwnerName + "</a> (Webmestre du site ChatManager)";
+
+                SMTP.SendEmail(user.GetFullName(), user.Email, Subject, Body);
+            }
+        }
+
 
         [OnlineUsers.AdminAccess]
         public void SendEmailBlockAccount(int id)
