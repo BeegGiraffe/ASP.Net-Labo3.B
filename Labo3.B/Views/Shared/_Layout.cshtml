@@ -31,20 +31,15 @@
                     <a href="/Distributors/Index">
                         <img src="/Distributors_Logo.png" class="menuIcon" title="Liste des distributeurs" />
                     </a>
-<<<<<<< Updated upstream
                     if (currentUser.IsAdmin)
                     {
-                        <a class="menuIcon" href="/Accounts/GroupEmail">
-                            <span class="icon fa fa-envelope" title="Envoi de courriels" data-placement="bottom"></span>
-                        </a>
-=======
-                    
-                    if (currentUser.IsAdmin)
-                    {
-                        @Helper.IconCmd("Accounts", "UsersLists", "menuIcon fa fa-users", "Liste des usagers")
->>>>>>> Stashed changes
-                    }
+                    @Helper.IconCmd("Accounts", "UsersLists", "menuIcon fa fa-users", "Liste des usagers")
+
+                    <a class="menuIcon" href="/Accounts/GroupEmail">
+                        <span class="icon fa fa-envelope" title="Envoi de courriels" data-placement="bottom"></span>
+                    </a>
                 }
+            }
 
             </div>
             @if (currentUser != null)
